@@ -1,0 +1,14 @@
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[user]
+	name = Vasily Polovnyov
+	email = vazilla@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[apply]
+	whitespace = fix
+[core]
+	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
