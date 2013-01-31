@@ -11,3 +11,5 @@ alias gd='git diff'
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+export PATH="/usr/local/heroku/bin:$PATH"
