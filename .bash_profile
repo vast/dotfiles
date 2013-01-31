@@ -1,5 +1,5 @@
 alias be='bundle exec'
-alias gst='git status'
+alias gst='git status -s'
 alias ga='git add'
 alias gc='git commit -m'
 alias gca='git commit -a -m'
