@@ -12,3 +12,6 @@
 	whitespace = fix
 [core]
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+	editor = subl -n -w
+[credential]
+	helper = osxkeychain
