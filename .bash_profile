@@ -1,4 +1,6 @@
 alias be='bundle exec'
+alias brails='bundle exec rails'
+alias brake='bundle exec rake'
 alias gst='git status -s'
 alias ga='git add'
 alias gc='git commit -m'
