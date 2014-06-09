@@ -10,6 +10,9 @@ alias gush='git push'
 alias gb='git branch'
 alias gco='git checkout'
 alias gd='git diff'
+alias pr='fs gh p'
+alias gh='fs gh'
+
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
