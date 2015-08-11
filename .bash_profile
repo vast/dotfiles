@@ -12,6 +12,7 @@ alias gco='git checkout'
 alias gd='git diff'
 alias pr='fs gh p'
 alias gh='fs gh'
+alias whativedone="git status | grep spec | awk '{print \$2}' | xargs bin/rspec"
 
 if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
   source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
