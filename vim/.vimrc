@@ -162,3 +162,6 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
+let g:syntastic_error_symbol = "\u2022"
+let g:syntastic_warning_symbol = "\u2022"
+
