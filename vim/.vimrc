@@ -81,16 +81,18 @@ endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*
 set wildignore+=**/node_modules
-set wildignore+=**/vendor/bundle
+set wildignore+=*/vendor/bundle/**
 set wildignore+=**/tmp
 set wildignore+=**/log
 set wildignore+=**/.build
+
 " Make it obvious where 100 characters is
 set textwidth=100
 set colorcolumn=+1
 
 " Numbers
 set number
+set relativenumber
 set numberwidth=5
 
 " Tab completion
@@ -110,6 +112,8 @@ inoremap <S-Tab> <c-n>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
+
+nnoremap <silent> <leader>/ :TComment<CR>
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
@@ -139,14 +143,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+nnoremap <D-S-{> :tabp<CR>
+nnoremap <D-S-}> :tabn<CR>
 
 " configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
-let g:syntastic_javascript_checkers = ['eslint']
-
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
@@ -162,6 +162,35 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
-let g:syntastic_error_symbol = "\u2022"
-let g:syntastic_warning_symbol = "\u2022"
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
+let g:ale_sign_error = "\u2022"
+let g:ale_sign_warning = "\u2022"
+let g:ale_sign_column_always = 1
+" let g:airline#extensions#tabline#enabled = 1
+let g:ruby_indent_assignment_style = "variable"
+
+set t_Co=256
+set termguicolors
+colorscheme seagull
+autocmd QuickFixCmdPost *grep* cwindow
+set lazyredraw
+
+set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+
+""http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
+" works only for OS X
+let os=substitute(system('uname'), '\n', '', '')
+if os == 'Darwin' || os == 'Mac'
+  set clipboard^=unnamed
+  set clipboard^=unnamedplus"
+endif
+
+" Searching
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch
+set incsearch " set incremental search, like modern browsers
+set showmatch " show matching braces
