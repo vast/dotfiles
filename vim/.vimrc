@@ -95,7 +95,6 @@ set colorcolumn=+1
 
 " Numbers
 set number
-set relativenumber
 set numberwidth=5
 
 " Tab completion
@@ -116,7 +115,12 @@ inoremap <S-Tab> <c-n>
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
+" All necessary mappings
 nnoremap <silent> <leader>/ :TComment<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-w> :tabclose<CR>
+nnoremap <C-]> gt
+nnoremap <C-[> gT
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
@@ -146,8 +150,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-nnoremap <D-S-{> :tabp<CR>
-nnoremap <D-S-}> :tabn<CR>
 
 " configure syntastic syntax checking to check on open as well as save
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
@@ -172,14 +174,16 @@ let g:ale_linters = {
 let g:ale_sign_error = "\u2022"
 let g:ale_sign_warning = "\u2022"
 let g:ale_sign_column_always = 1
-" let g:airline#extensions#tabline#enabled = 1
+
 let g:ruby_indent_assignment_style = "variable"
 
 set t_Co=256
 set termguicolors
-colorscheme seagull
-autocmd QuickFixCmdPost *grep* cwindow
 set lazyredraw
+set nocursorline
+set ttyfast
+
+colorscheme seagull
 
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
@@ -191,9 +195,5 @@ if os == 'Darwin' || os == 'Mac'
   set clipboard^=unnamedplus"
 endif
 
-" Searching
-set ignorecase " case insensitive searching
-set smartcase " case-sensitive if expresson contains a capital letter
-set hlsearch
-set incsearch " set incremental search, like modern browsers
-set showmatch " show matching braces
+set ruler rulerformat=%40(%=%<%F%m\ \
+                      \›\ %l/%L:%v%)
