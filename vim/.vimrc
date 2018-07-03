@@ -121,6 +121,8 @@ nnoremap <C-t> :tabnew<CR>
 nnoremap <C-w> :tabclose<CR>
 nnoremap <C-]> gt
 nnoremap <C-[> gT
+nmap     <C-F> <Plug>CtrlSFPrompt
+vmap     <C-F>F <Plug>CtrlSFVwordExec
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
