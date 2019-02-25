@@ -32,6 +32,7 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'janko-m/vim-test'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'digitaltoad/vim-pug'
 Plug 'tpope/vim-endwise'
@@ -45,6 +46,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
 Plug 'nightsense/seabird'
+Plug 'mattn/emmet-vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

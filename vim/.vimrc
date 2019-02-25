@@ -47,6 +47,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .{eslint}rc set filetype=json
+  autocmd BufRead,BufNewFile *.pcss set filetype=scss
+  autocmd BufRead,BufNewFile *.morph set filetype=javascript
 augroup END
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
@@ -119,8 +121,8 @@ nnoremap <leader><leader> <c-^>
 nnoremap <silent> <leader>/ :TComment<CR>
 nnoremap <C-t> :tabnew<CR>
 nnoremap <C-w> :tabclose<CR>
-nnoremap <C-]> gt
-nnoremap <C-[> gT
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 nmap     <C-F> <Plug>CtrlSFPrompt
 vmap     <C-F>F <Plug>CtrlSFVwordExec
 
@@ -148,10 +150,10 @@ set splitbelow
 set splitright
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+nnoremap <S-j> <C-w>j
+nnoremap <S-k> <C-w>k
+nnoremap <S-h> <C-w>h
+nnoremap <S-l> <C-w>l
 
 " configure syntastic syntax checking to check on open as well as save
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
@@ -171,7 +173,10 @@ endif
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'ruby': ['rubocop']
 \}
+
+let g:ale_ruby_rubocop_executable = "bin/rubocop"
 
 let g:ale_sign_error = "\u2022"
 let g:ale_sign_warning = "\u2022"
@@ -185,7 +190,8 @@ set lazyredraw
 set nocursorline
 set ttyfast
 
-colorscheme seagull
+" colorscheme seagull
+colorscheme solarized8_light
 
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
@@ -193,8 +199,8 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 " works only for OS X
 let os=substitute(system('uname'), '\n', '', '')
 if os == 'Darwin' || os == 'Mac'
-  set clipboard^=unnamed
-  set clipboard^=unnamedplus"
+  " set clipboard^=unnamed
+  " set clipboard^=unnamedplus"
 endif
 
 set ruler rulerformat=%40(%=%<%F%m\ \
