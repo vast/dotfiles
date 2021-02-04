@@ -27,26 +27,24 @@ com! -nargs=+  -bar Bundle call VundleToPlug("Bundle", <args>)
 call plug#begin('~/.vim/bundle')
 
 " Define bundles via Github repos
-Plug 'christoomey/vim-run-interactive'
 Plug 'dyng/ctrlsf.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'janko-m/vim-test'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'digitaltoad/vim-pug'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
-Plug 'nightsense/seabird'
-Plug 'mattn/emmet-vim'
+Plug 'junegunn/goyo.vim'
+Plug 'lambdalisue/gina.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
