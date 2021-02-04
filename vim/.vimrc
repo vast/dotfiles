@@ -67,23 +67,6 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Use one space, not two, after punctuation.
 set nojoinspaces
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
-endif
-
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*
 set wildignore+=**/node_modules
 set wildignore+=*/vendor/bundle/**
@@ -96,6 +79,7 @@ set textwidth=100
 set colorcolumn=+1
 
 " Numbers
+" set relativenumber number
 set number
 set numberwidth=5
 
@@ -120,11 +104,14 @@ nnoremap <leader><leader> <c-^>
 " All necessary mappings
 nnoremap <silent> <leader>/ :TComment<CR>
 nnoremap <C-t> :tabnew<CR>
-nnoremap <C-w> :tabclose<CR>
+" nnoremap <C-w> :tabclose<CR>
 nnoremap <C-l> gt
 nnoremap <C-h> gT
 nmap     <C-F> <Plug>CtrlSFPrompt
 vmap     <C-F>F <Plug>CtrlSFVwordExec
+
+" Source Vim configuration file and install plugins
+nnoremap <silent><leader>1 :source ~/.vimrc \| :PlugInstall<CR>
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
@@ -133,14 +120,21 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " vim-test mappings
-nnoremap <silent> <Leader>t :TestFile<CR>
-nnoremap <silent> <Leader>s :TestNearest<CR>
+nnoremap <silent> <Leader>t :w <CR> <bar> :TestFile<CR>
+nnoremap <silent> <Leader>s :w <CR> <bar> :TestNearest<CR>
 nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
+
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+nnoremap <C-p> :GFiles<CR>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -149,19 +143,22 @@ let g:html_indent_tags = 'li\|p'
 set splitbelow
 set splitright
 
+" Scroll with touchpad
+set mouse=nicr
+
 " Quicker window movement
-nnoremap <S-j> <C-w>j
-nnoremap <S-k> <C-w>k
-nnoremap <S-h> <C-w>h
-nnoremap <S-l> <C-w>l
+" nnoremap <S-j> <C-w>j
+" nnoremap <S-k> <C-w>k
+" nnoremap <S-h> <C-w>h
+" nnoremap <S-l> <C-w>l
 
 " configure syntastic syntax checking to check on open as well as save
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
-set spellfile=$HOME/.vim-spell-en.utf-8.add
+" set spellfile=$HOME/.vim-spell-en.utf-8.add
 
 " Autocomplete with dictionary words when spell check is on
-set complete+=kspell
+" set complete+=kspell
 
 " Always use vertical diffs
 set diffopt+=vertical
@@ -184,6 +181,8 @@ let g:ale_sign_column_always = 1
 
 let g:ruby_indent_assignment_style = "variable"
 
+command -nargs=+ G :Gina <args>
+
 set t_Co=256
 set termguicolors
 set lazyredraw
@@ -192,6 +191,7 @@ set ttyfast
 
 " colorscheme seagull
 colorscheme solarized8_light
+" colorscheme nord
 
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
@@ -199,9 +199,30 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 " works only for OS X
 let os=substitute(system('uname'), '\n', '', '')
 if os == 'Darwin' || os == 'Mac'
-  " set clipboard^=unnamed
-  " set clipboard^=unnamedplus"
+  set clipboard^=unnamedplus"
 endif
 
 set ruler rulerformat=%40(%=%<%F%m\ \
                       \›\ %l/%L:%v%)
+
+
+" set header title for journal & enter writing mode
+function! JournalMode()
+    execute 'normal gg'
+    let filename = '# ' . strftime('%d/%m/%y')
+    call setline(1, filename)
+    execute 'normal o'
+    execute 'Goyo'
+    execute ':4'
+endfunction
+
+" workflow for daily journal
+augroup journal
+    autocmd!
+
+    " populate journal template
+    autocmd VimEnter */journal/**   0r ~/.config/nvim/templates/journal.skeleton
+
+    " set header for the particular journal
+    autocmd VimEnter */journal/**   :call JournalMode()
+augroup END
