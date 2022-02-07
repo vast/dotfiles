@@ -1,0 +1,41 @@
+setopt PROMPT_SUBST
+setopt BSD_ECHO
+setopt MAGIC_EQUAL_SUBST
+unsetopt MULTIOS
+autoload -Uz compinit && compinit
+
+alias be='bundle exec'
+alias brails='bundle exec rails'
+alias brake='bundle exec rake'
+alias gst='git status -s'
+alias ga='git add'
+alias gc='git commit -m'
+alias gca='git commit -a -m'
+alias gull='git pull'
+alias gush='git push'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcm='git checkout master'
+alias gcd='git checkout dev'
+alias gom='git pull origin master'
+alias god='git pull origin dev'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias whativedone="git status | grep spec | awk '{print \$2}' | xargs bin/rspec"
+alias ia="open $@ -a 'ia Writer'"
+alias pr='jd gh pr
+alias ci='jd ci'
+alias g='git'
+alias vim='nvim
+alias journal='nvim ~/journal/$(date -v-1d "+%Y-%m-%d").md'
+alias mc='mc --nosubshell'
+
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+eval "$(fnm env --use-on-cd)"
+eval "$(rbenv init -)"
+eval "$($HOME/.jd/bin/jd init -)"
+
+export EDITOR=nvim
+export PS1='⌘ %~ $(git branch 2> /dev/null | grep -e "^*" | sed -E  s/^\\\*\ \(.+\)$/\(\\\1\)\/): '
