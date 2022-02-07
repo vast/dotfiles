@@ -1,5 +1,9 @@
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	co = checkout
+        c = commit
+        st = status
+        a = add
 [user]
 	name = Vasily Polovnyov
 	email = vasily@polovnyov.ru
@@ -12,6 +16,12 @@
 	whitespace = fix
 [core]
 	whitespace = fix,space-before-tab,tab-in-indent,trailing-space
-	editor = subl -n -w
-[credential]
-	helper = osxkeychain
+	editor = nvim
+[push]
+        default = simple
+[commit]
+        verbose = true
+[pull]
+        rebase = false
+[advice]
+        detachedHead = false
